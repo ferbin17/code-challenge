@@ -18,6 +18,52 @@ require("@rails/actiontext");
 import { Application } from "stimulus";
 import { definitionsFromContext } from "stimulus/webpack-helpers";
 
+require("jquery")
+import $ from 'jquery';
+global.$ = $
+global.jQuery = $
+
 const application = Application.start();
 const context = require.context("../controllers", true, /\.js$/);
 application.load(definitionsFromContext(context));
+
+window.show_previews = function(input) {
+  $('#preview-grid-container').find('.unsaved-preview').remove();
+  if (input.files) {
+    $(input.files).each(function(i, file){
+      var reader = new FileReader();
+
+      // Create container
+      var img_div = $("<div>", {
+        class: "grid-item preview-grid unsaved-preview"
+      }).appendTo('#preview-grid-container');
+      
+      // Create image tag
+      var img_div = $("<img>", {
+        class: "img_prev",
+        src: "#",
+        alt: "your image"
+      }).appendTo(img_div);
+      
+      // Show image in img tag
+      reader.onload = function (e) {
+        $(img_div)
+          .attr('src', e.target.result)
+          .width(80)
+          .height(100);
+      };
+      reader.readAsDataURL(file);
+    })
+  }
+}
+
+
+window.delete_image = function() {
+  var x = confirm("Are you sure you want to delete?");
+  if (x){
+    console.log(11);
+    return true;
+  }else{
+    return false;
+  }
+}

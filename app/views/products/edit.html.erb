@@ -1,0 +1,12 @@
+<div class="container py-5">
+  <h3><%= @product.name.titleize %></h3>
+  <div class="row">
+    <div class="col">
+      <%= link_to "< #{@product.name.titleize}", company_product_path %>
+    </div>
+  </div>
+  <div class="container">
+    <%= render partial: "form", locals: {company: @company, product: @product,
+        product_images: @product_images} %>
+  </div>
+</div>
