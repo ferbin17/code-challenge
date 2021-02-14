@@ -1,4 +1,5 @@
 <!-- Feature Addition -->
+##### New Feature: User Model and User type
 #### Goal
 - Bring User model with two type of Users (Seller, Consumer)
 - Make seperate panel for seller and consumer
