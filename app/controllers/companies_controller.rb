@@ -31,6 +31,13 @@ class CompaniesController < ApplicationController
       render :edit
     end
   end
+  
+  def products
+    unless @company.present?
+      redirect_to companies_path
+    end
+    @products = @company.products
+  end
 
   private
     def company_params

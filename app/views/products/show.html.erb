@@ -1,0 +1,53 @@
+<div class="container py-5">
+  <h3><%= @product.name.titleize %></h3>
+  <div class="row">
+    <div class="col">
+      <%= link_to "< #{@company.name.titleize}'s Products", company_products_path %>
+    </div>
+    <div class="col-1 text-right">
+      <%= link_to "Delete", company_product_path, method: :delete %>
+    </div>
+    <div class="col-1 text-right">
+      <%= link_to "Edit", edit_company_product_path %>
+    </div>
+  </div>
+  <div class="bg-success">
+    <div class="container p-5 text-white">
+      <h1><%= @product.name %></h1>
+    </div>
+  </div>
+
+  <div class="row bg-light product-show">
+    <div class="col-12 col-lg-8 p-lg-5 pt-4" id="larger-preview">
+      <%= image_tag @product.images.first %>
+    </div>
+    <div class="col-12 col-lg-4 pt-lg-5">
+      <div class="product-name">
+        Product Name: <h5><%= @product.name %></h5>
+      </div>
+      <div class="product-discription">
+        Product Discription: <p><%= @product.discription %></p>
+      </div>
+      <div class="display-images">
+        <h5>Product Images:</h5>
+        <div class="container grid-container preview-grid-container">
+          <% @product.images.each do |image| %>
+            <div class="grid-item preview-grid">
+              <%= image_tag image, onclick: "preview_image(this)" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-success text-white text-center py-3">
+    <p class="lead"><%= @company.phone %> — <%= @company.email %></p>
+  </div>
+</div>
+
+<script>
+  function preview_image(img_tag){
+    $('#larger-preview').html($(img_tag).parent().html());
+  }
+</script>
