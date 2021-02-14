@@ -58,12 +58,36 @@ window.show_previews = function(input) {
 }
 
 
-window.delete_image = function() {
-  var x = confirm("Are you sure you want to delete?");
-  if (x){
-    console.log(11);
+window.delete_image = function(div) {
+  var response = confirm("Are you sure you want to delete?");
+  if(response){
+    var new_value = $('#product_images_to_be_deleted').val() + "," + $(div).attr("data-id");
+    $('#product_images_to_be_deleted').val(new_value);
+    $(div).remove();
     return true;
   }else{
     return false;
   }
 }
+
+$( document ).ready(function() {
+  $('body').delegate(".number-field", "keypress", function(e){
+    var keynum;
+    if(window.event) { // IE                  
+      keynum = e.keyCode;
+    } else if(e.which){ // Netscape/Firefox/Opera                 
+      keynum = e.which;
+    }
+
+    var reg = /[0-9, \.]/;
+    if (!(reg.test(String.fromCharCode(keynum)))){
+      return false;
+    }else{
+      if($(this).val() == ""){
+        if ((/\./).test(String.fromCharCode(keynum))){
+          return false;
+        }
+      }
+    };
+  });
+})

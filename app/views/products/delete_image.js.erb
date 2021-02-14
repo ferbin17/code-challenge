@@ -1,8 +1,0 @@
-<% if @deleted.present? %>
-  var id = <%= @deleted %>;
-  
-<% else %>
-  var id = <%= @image.id %>;
-  alert("Product should have atleast one image");
-<% end %>
-$(`a#preview_${id}`).remove();

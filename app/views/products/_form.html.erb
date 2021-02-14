@@ -38,27 +38,21 @@
           <%= p.file_field :images, multiple: true, onchange: "show_previews(this);" %>
         </div>
       </div>
+      <%= p.hidden_field :images_to_be_deleted, value: "" %>
       <%= p.submit %>
     </div>
     
     <div class="img-preview-div col-12 col-lg-4 pt-lg-5">
       <div id="preview-grid-container" class="container grid-container preview-grid-container">
-        <% if @product.images.present? %>
+        <% if !@product.new_record? && @product.images.present? %>
           <% @product.images.each do |image| %>
-            <%= link_to delete_image_product_path(id: @product, image_id: image.id), method: :delete,
-                remote: true, data: { confirm: 'Are you sure?' }, id: "preview_#{image.id}" do %> 
-                <div class="grid-item preview-grid saved-preview">
-                  <%= image_tag image %>
-                </div>
-            <% end %>
+            <div class="grid-item preview-grid saved-preview" onclick="delete_image(this)" data-id=<%= image.id %>>
+              <%= image_tag image %>
+            </div>
           <% end %>
         <% end %>
       </div>
     </div>
   </div>
 <% end %>
-<!-- Assume jQuery is loaded -->
-<script>
-
-</script>
 

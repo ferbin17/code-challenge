@@ -9,9 +9,5 @@ Rails.application.routes.draw do
     resources :products
   end
   
-  resources :products, only: [:index] do
-    member do
-      delete :delete_image
-    end
-  end
+  resources :products, only: [:index]
 end

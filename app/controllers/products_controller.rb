@@ -40,15 +40,6 @@ class ProductsController < ApplicationController
   def show
   end
   
-  def delete_image
-    @product = Product.find_by_id(params[:id])
-    if @product.present? 
-      @image = @product.images.find_by_id(params[:image_id])
-      @deleted = @image.id if @product.images.count > 1 && @image.destroy 
-    end
-    respond_to :js
-  end
-  
   private
     def find_company
       @company = Company.find_by_id(params[:company_id])
@@ -68,6 +59,6 @@ class ProductsController < ApplicationController
     
     def product_params
       params.require(:product).permit(:id, :name, :discription, :price,
-        images: [])
+        :images_to_be_deleted, images: [])
     end
 end
