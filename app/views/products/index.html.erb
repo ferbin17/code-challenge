@@ -10,7 +10,7 @@
       <div class="grid-item">
         <%= link_to(company_product_path(product.company, product)) do %>
           <div class="product-image">
-            <%= image_tag product.images.first %>
+            <%= image_tag product.images.first if product.images.present? %>
           </div>
           <div class="product-name">
             <h5><%= product.name %></h5>

@@ -8,7 +8,7 @@ class Product < ApplicationRecord
   validates :images, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg'],
             if: Proc.new{|p| p.images.collect(&:new_record?).include?(true)}
   validate :deleting_images, if: Proc.new{|p| p.images_to_be_deleted.present?}
-  before_save :delete_images
+  before_save :delete_images, if: Proc.new{|p| p.images_to_be_deleted.present?}
   
   private
     def deleting_images
