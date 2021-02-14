@@ -5,7 +5,7 @@ class Product < ApplicationRecord
   validates_numericality_of :price, greater_than: 0, if: Proc.new{|p| p.price.present?}
   validates_presence_of :images, message: "Product should have atleast one image"
   has_many_attached :images
-  validates :images, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg'],
+  validates :images, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/webp'],
             if: Proc.new{|p| p.images.collect(&:new_record?).include?(true)}
   validate :deleting_images, if: Proc.new{|p| p.images_to_be_deleted.present?}
   before_save :delete_images, if: Proc.new{|p| p.images_to_be_deleted.present?}

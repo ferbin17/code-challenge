@@ -9,20 +9,24 @@
     </div>
   </div>
   <div class="container grid-container">
-    <% @products.each_with_index do |product, index| %>
-      <div class="grid-item">
-        <%= link_to(company_product_path(@company, product)) do %>
-          <div class="product-image">
-            <%= image_tag product.images.first %>
-          </div>
-          <div class="product-name">
-            <h5><%= product.name %></h5>
-          </div>
-          <div class="product-discription">
-            <p class="truncate"><%= product.discription %></p>
-          </div>
-        <% end %>
-      </div>
+    <% if @products.present? %>
+      <% @products.each_with_index do |product, index| %>
+        <div class="grid-item">
+          <%= link_to(company_product_path(@company, product)) do %>
+            <div class="product-image">
+              <%= image_tag product.images.first %>
+            </div>
+            <div class="product-name">
+              <h5><%= product.name %></h5>
+            </div>
+            <div class="product-discription">
+              <p class="truncate"><%= product.discription %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      No Products
     <% end %>
   </div>
 </div>
